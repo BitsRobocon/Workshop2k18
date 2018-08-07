@@ -97,6 +97,7 @@ void ultsnd()
 
   Serial.print("Distance: ");
   Serial.println(distance);
+  Blynk.virtualWrite(V5, distance);
   
 }
 TimedAction numberThread = TimedAction(10,ultsnd);
