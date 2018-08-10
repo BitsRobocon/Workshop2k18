@@ -96,7 +96,7 @@ void ultsnd()
   distance=(duration/2)/29;
 
   Serial.print("Distance: ");
-  Serial.print(distance);
+  Serial.println(distance);
   
 }
 TimedAction numberThread = TimedAction(10,ultsnd);
@@ -121,7 +121,7 @@ void setup()
 }
 void loop()
 {
-  numberThread.check()
+  numberThread.check();
   Blynk.run();
 }
 
