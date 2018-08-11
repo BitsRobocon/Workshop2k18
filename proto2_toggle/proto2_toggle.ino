@@ -10,7 +10,22 @@ int echopin=13;
 long duration;
 int distance;
 char auth[] = "89c6f85111344502acd50d7b5a21b488";
+void ultsnd()
+{
+  digitalWrite(trigpin,LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigpin,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigpin,LOW);
+  
+  duration=pulseIn(echopin,HIGH);
+  distance=(duration/2)/29;
 
+  Serial.print("Distance: ");
+  Serial.println(distance);
+ 
+  
+}
 BLYNK_WRITE(V1) {
   int x = param[0].asInt();
   int y = param[1].asInt();
@@ -88,20 +103,9 @@ BLYNK_WRITE(V3)
   Serial.println(buttonState);
   
   if(buttonState==1)
-  {Blynk.syncVirtual(V3);
-
-  digitalWrite(trigpin,LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigpin,HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigpin,LOW);
-  
-  duration=pulseIn(echopin,HIGH);
-  distance=(duration/2)/29;
-
-  Serial.print("Distance: ");
-  Serial.println(distance);
-  Blynk.virtualWrite(V5,distance);
+  {
+  ultsnd()
+  Blynk.virtualWrite(V5,100);
   Serial.println(buttonState);
   Blynk.run();
   buttonState=param.asInt();
@@ -137,6 +141,6 @@ void loop()
 {
   
   Blynk.run();
-  
+  ultsnd();
 }
 
