@@ -1,19 +1,15 @@
-#include <TimedAction.h>
-
 #define BLYNK_PRINT Serial
 #include <BlynkSimpleSerialBLE.h>
 #include <SoftwareSerial.h>
-#include <TimedAction.h>
-//#define BLYNK_MAX_READBYTES 512
-long duration;
-int distance;
 SoftwareSerial SerialBLE(4,7); // RX, TX
 #include <Servo.h> 
 Servo myservo;
 int motorR1= 3, motorR2=5 , motorL1=9 , motorL2=6;
 int trigpin=12;
 int echopin=13;
-char auth[] = "ef8b08b97c7d459fa76ed473977e0984";
+long duration;
+int distance;
+char auth[] = "89c6f85111344502acd50d7b5a21b488";
 
 BLYNK_WRITE(V1) {
   int x = param[0].asInt();
@@ -84,10 +80,16 @@ BLYNK_WRITE(V2)
    int pos = param[0].asInt();
    pos=map(pos,-90,90,255,0);
    myservo.write(pos);
-   
 }
-void ultsnd()
+
+BLYNK_WRITE(V3)
 {
+  int buttonState=param.asInt();
+  Serial.println(buttonState);
+  
+  if(buttonState==1)
+  {Blynk.syncVirtual(V3);
+
   digitalWrite(trigpin,LOW);
   delayMicroseconds(2);
   digitalWrite(trigpin,HIGH);
@@ -99,10 +101,19 @@ void ultsnd()
 
   Serial.print("Distance: ");
   Serial.println(distance);
- 
-  
+  Blynk.virtualWrite(V5,distance);
+  Serial.println(buttonState);
+  Blynk.run();
+  buttonState=param.asInt();
+
+  }
 }
-TimedAction numberThread = TimedAction(10,ultsnd);
+BLYNK_CONNECTED()
+{
+  Blynk.syncVirtual(V1);
+  Blynk.syncVirtual(V2);
+  Blynk.syncVirtual(V3);
+}
 void setup()
 {
   pinMode(motorR1 , OUTPUT);
@@ -114,18 +125,18 @@ void setup()
   myservo.attach(11); 
   // Debug console
   Serial.begin(9600);
-  pinMode(trigpin,OUTPUT);
-  pinMode(echopin,INPUT);
+
   SerialBLE.begin(9600);
   Blynk.begin(SerialBLE, auth);
 
   Serial.println("Waiting for connections...");
   
 }
+
 void loop()
 {
-  //Blynk.virtualWrite(V5, distance);
-  numberThread.check();
+  
   Blynk.run();
+  
 }
 
