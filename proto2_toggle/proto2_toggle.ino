@@ -125,6 +125,8 @@ void setup()
   pinMode(motorL1 , OUTPUT);
   pinMode(motorL2 , OUTPUT);
   pinMode(2, OUTPUT);
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echoPin, INPUT);
   digitalWrite(2 , HIGH);
   myservo.attach(11); 
   // Debug console
@@ -141,6 +143,6 @@ void loop()
 {
   
   Blynk.run();
-  ultsnd();
+  
 }
 
