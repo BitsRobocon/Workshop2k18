@@ -81,6 +81,7 @@ default:
 BLYNK_WRITE(V2)
 {
    int pos = param[0].asInt();
+   pos=map(pos,-90,90,255,0);
    myservo.write(pos);
    
 }
@@ -97,7 +98,7 @@ void ultsnd()
 
   Serial.print("Distance: ");
   Serial.println(distance);
-  Blynk.virtualWrite(V5, distance);
+ 
   
 }
 TimedAction numberThread = TimedAction(10,ultsnd);
@@ -122,6 +123,7 @@ void setup()
 }
 void loop()
 {
+  Blynk.virtualWrite(V5, distance);
   numberThread.check();
   Blynk.run();
 }
