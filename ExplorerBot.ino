@@ -50,7 +50,7 @@ void loop()
   Blynk.run();
   timer.run(); // Initiates BlynkTimer
     // You can inject your own code or combine it with other sketches.
-  // Check other examples on how to communicate with Blynk. Remember
+  // Check other exampl   es on how to communicate with Blynk. Remember
   // to avoid delay() function!
   // Clears the trigPin
 digitalWrite(trigPin, LOW);

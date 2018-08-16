@@ -1,60 +1,45 @@
 #define BLYNK_PRINT Serial
 #include <SPI.h>
 #include <SoftwareSerial.h>
-SoftwareSerial SerialBLE(0 ,1); // RX, TX
+SoftwareSerial SerialBLE(10,11); // RX, TX
 #include <BlynkSimpleSerialBLE.h>
 
-char auth[] = " ef8b08b97c7d459fa76ed473977e0984";
+char auth[] = "89c6f85111344502acd50d7b5a21b488";
 const int trigPin = 12;                                              
 const int echoPin = 13;
-const int motorR=10;
-const int motorL=11;
+const int motorR=6;
+const int motorL=5;
 // defines variables
 long duration;
 int distance;
-int green, blue;
+#include <Servo.h>
 
-BLYNK_WRITE(V1) 
-{
-  green = param[0].asInt();
-  blue = param[1].asInt();
-}
+Servo myservo;  // create servo object to control a servo
+
+int pos=0;
 
 void setup()
 {
   pinMode(motorR, OUTPUT);
   pinMode(motorL, OUTPUT);
   Serial.begin(9600);
-  SerialBLE.begin(9600);
   Blynk.begin(SerialBLE, auth);
+  SerialBLE.begin(9600);
+   myservo.attach(3);  
   Serial.println("Waiting for connections...");
- // Blynk.begin(auth);
 }
 
 void loop()
 {
   Blynk.run();
-  switch(green)
-  {
-    case 0: //turn left
-    analogWrite(motorL, 0);
-    analogWrite(motorR, 128);
-    delay(100);
-    break; 
-    case 6: // turn right
-    analogWrite(motorL, 128);
-    analogWrite(motorR, 0);
-    delay(100);
-    break;
-    default : // put the analog values of the blue in pwm pins 
-    blue= blue-128;
-    if(blue <= 0)
-    blue=0;
-    blue=blue*2;
-    analogWrite(motorR, blue);
-    analogWrite(motorR, blue);
-    delay(100);
-    break;
-    
+ for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
   }
-}
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+  }
+
