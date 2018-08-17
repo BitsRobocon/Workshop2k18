@@ -104,7 +104,7 @@ BLYNK_WRITE(V3)
   
   if(buttonState==1)
   {
-  ultsnd()
+  ultsnd();
   Blynk.virtualWrite(V5,100);
   Serial.println(buttonState);
   Blynk.run();
@@ -125,8 +125,8 @@ void setup()
   pinMode(motorL1 , OUTPUT);
   pinMode(motorL2 , OUTPUT);
   pinMode(2, OUTPUT);
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT);
+  pinMode(trigpin, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echopin, INPUT);
   digitalWrite(2 , HIGH);
   myservo.attach(11); 
   // Debug console
