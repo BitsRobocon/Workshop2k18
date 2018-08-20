@@ -142,7 +142,7 @@ void loop()
 {
   Blynk.run();
   ultsnd();
-  if (distance<10)
+  while (distance<10)
   {
     analogWrite(motorL1, 0);
     analogWrite(motorL2, 255);
@@ -150,4 +150,7 @@ void loop()
     analogWrite(motorR2, 0);
     delayMicroseconds(10);   
   }
-}
+ 
+  
+  }
+
