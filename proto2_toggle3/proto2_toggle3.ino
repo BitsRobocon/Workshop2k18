@@ -144,6 +144,7 @@ void loop()
   ultsnd();
   while (distance<10)
   {
+    ultsnd();
     analogWrite(motorL1, 0);
     analogWrite(motorL2, 255);
     analogWrite(motorR1, 255);
