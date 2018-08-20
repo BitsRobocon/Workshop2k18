@@ -135,22 +135,19 @@ void setup()
   SerialBLE.begin(9600);
   Blynk.begin(SerialBLE, auth);
 
-  Serial.println("Waiting for connections...");
-  
+  Serial.println("Waiting for connections..."); 
 }
 
 void loop()
 {
-  
   Blynk.run();
   ultsnd();
   if (distance<10)
   {
     analogWrite(motorL1, 0);
-    analogWrite(motorL2, 0);
-    analogWrite(motorR1, 0);
+    analogWrite(motorL2, 255);
+    analogWrite(motorR1, 255);
     analogWrite(motorR2, 0);
-    
+    delayMicroseconds(10);   
   }
 }
-
