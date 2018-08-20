@@ -105,15 +105,7 @@ BLYNK_WRITE(V3)
   if(buttonState==1)
   {
   ultsnd();
-  Blynk.virtualWrite(V5,distance
-  
-  
-  
-  
-  
-  
-  
-  );
+  Blynk.virtualWrite(V5,distance);
   Serial.println(buttonState);
   Blynk.run();
   buttonState=param.asInt();
@@ -136,7 +128,7 @@ void setup()
   pinMode(trigpin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echopin, INPUT);
   digitalWrite(2 , HIGH);
-  myservo.attach(11); 
+  myservo.attach(10); 
   // Debug console
   Serial.begin(9600);
 
@@ -158,6 +150,7 @@ void loop()
     analogWrite(motorL2, 0);
     analogWrite(motorR1, 0);
     analogWrite(motorR2, 0);
+    Blynk.virtualWrite(V4,HIGH);
   }
 }
 

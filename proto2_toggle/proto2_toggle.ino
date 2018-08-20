@@ -136,7 +136,7 @@ void setup()
   pinMode(trigpin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echopin, INPUT);
   digitalWrite(2 , HIGH);
-  myservo.attach(11); 
+  myservo.attach(10); 
   // Debug console
   Serial.begin(9600);
 
