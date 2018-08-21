@@ -5,6 +5,7 @@ SoftwareSerial SerialBLE(4,7); // RX, TX
 #include <Servo.h> 
 Servo myservo;
 int motorR1= 3, motorR2=5 , motorL1=9 , motorL2=6;
+int powpin=8;
 int trigpin=12;
 int echopin=13;
 long duration;
@@ -128,6 +129,7 @@ BLYNK_CONNECTED()
 }
 void setup()
 {
+  pinMode(powpin,OUTPUT);
   pinMode(motorR1 , OUTPUT);
   pinMode(motorR2 , OUTPUT);
   pinMode(motorL1 , OUTPUT);
@@ -136,6 +138,7 @@ void setup()
   pinMode(trigpin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echopin, INPUT);
   digitalWrite(2 , HIGH);
+  digitalWrite(powpin,HIGH);
   myservo.attach(10); 
   // Debug console
   Serial.begin(9600);

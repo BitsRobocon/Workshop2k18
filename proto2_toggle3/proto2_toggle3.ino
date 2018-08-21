@@ -149,9 +149,10 @@ void loop()
     analogWrite(motorL2, 255);
     analogWrite(motorR1, 255);
     analogWrite(motorR2, 0);
-    delayMicroseconds(10);   
+    delayMicroseconds(10);  
+    Serial.println("Hola"); 
   }
- 
+  
   
   }
 

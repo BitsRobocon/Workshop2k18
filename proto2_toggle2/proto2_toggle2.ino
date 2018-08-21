@@ -149,8 +149,6 @@ void loop()
     analogWrite(motorL1, 0);
     analogWrite(motorL2, 0);
     analogWrite(motorR1, 0);
-    analogWrite(motorR2, 0);
-    Blynk.virtualWrite(V4,HIGH);
-  }
+    analogWrite(motorR2, 0);    }
 }
 
