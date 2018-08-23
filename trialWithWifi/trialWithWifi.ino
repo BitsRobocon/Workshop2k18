@@ -16,7 +16,7 @@ char ssid[] = "YourNetworkName";
 char pass[] = "YourPassword";
 
 // Hardware Serial on Mega, Leonardo, Micro...
-#define EspSerial Serial1
+#define EspSerial Serial
 
 // or Software Serial on Uno, Nano...
 //#include <SoftwareSerial.h>
