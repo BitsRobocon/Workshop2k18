@@ -101,24 +101,15 @@ BLYNK_WRITE(V2)
 
 BLYNK_WRITE(V3)
 {
-  int buttonState=param.asInt();
-  Serial.println(buttonState);
+  //int buttonState=param.asInt();
+  //Serial.println(buttonState);
   
-  if(buttonState==1)
+  //if(buttonState==1)
   {
   ultsnd();
-  Blynk.virtualWrite(V5,distance
-  
-  
-  
-  
-  
-  
-  
-  );
-  Serial.println(buttonState);
-  Blynk.run();
-  buttonState=param.asInt();
+  Blynk.virtualWrite(V5,distance);
+  //Serial.println(buttonState);
+  //buttonState=param.asInt();
 
   }
 }
