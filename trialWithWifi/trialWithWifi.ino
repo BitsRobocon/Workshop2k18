@@ -16,11 +16,11 @@ char ssid[] = "YourNetworkName";
 char pass[] = "YourPassword";
 
 // Hardware Serial on Mega, Leonardo, Micro...
-#define EspSerial Serial
+//#define EspSerial Serial
 
 // or Software Serial on Uno, Nano...
-//#include <SoftwareSerial.h>
-//SoftwareSerial EspSerial(2, 3); // RX, TX
+#include <SoftwareSerial.h>
+SoftwareSerial EspSerial(2, 3); // RX, TX
 
 // Your ESP8266 baud rate:
 #define ESP8266_BAUD 115200
