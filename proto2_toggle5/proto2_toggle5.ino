@@ -26,7 +26,7 @@ int distance;
 
 char auth[] = "89c6f85111344502acd50d7b5a21b488";
 
-
+#define BLYNK_MAX_READBYTES 99999
 
 BLYNK_WRITE(V1) {
 

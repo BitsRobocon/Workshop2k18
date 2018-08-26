@@ -1,7 +1,7 @@
 #define BLYNK_PRINT Serial
 #include <BlynkSimpleSerialBLE.h>
 #include <SoftwareSerial.h>
-#define BLYNK_MAX_READBYTES 1024
+
 SoftwareSerial SerialBLE(4,7); // RX, TX
 #include <Servo.h> 
 Servo myservo;
@@ -12,6 +12,7 @@ int echopin=13;
 long duration;
 int distance;
 char auth[] = "89c6f85111344502acd50d7b5a21b488";
+#define BLYNK_MAX_READBYTES 99999
 void ultsnd()
 {
   digitalWrite(trigpin,LOW);
