@@ -215,7 +215,7 @@ Blynk.virtualWrite(V5, distance);
 
 
 
-
+#define BLYNK_MAX_READBYTES 99999
 void setup()
 
 {
