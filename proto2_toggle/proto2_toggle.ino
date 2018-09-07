@@ -108,15 +108,7 @@ BLYNK_WRITE(V3)
   if(buttonState==1)
   {
   ultsnd();
-  Blynk.virtualWrite(V5,distance
-  
-  
-  
-  
-  
-  
-  
-  );
+  Blynk.virtualWrite(V5,distance);
   Serial.println(buttonState);
   Blynk.run();
   buttonState=param.asInt();
