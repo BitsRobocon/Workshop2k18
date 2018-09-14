@@ -1,20 +1,22 @@
-#define BLYNK_PRINT Serial
-#include <BlynkSimpleSerialBLE.h>
-#include <SoftwareSerial.h>
+#define BLYNK_PRINT Serial                                //setting up blynk serial
+#include <BlynkSimpleSerialBLE.h>                         
+#include <SoftwareSerial.h>                               
 
 SoftwareSerial SerialBLE(4,7); // RX, TX
-#include <Servo.h> 
+
+#include <Servo.h>                                        //servo library
 Servo myservo;
+
 int motorR1= 3, motorR2=5 , motorL1=9 , motorL2=6;
 int powpin=8;
 int trigpin=12;
 int echopin=13;
 long duration;
 int distance;
-char auth[] = "89c6f85111344502acd50d7b5a21b488";
-#define BLYNK_MAX_READBYTES 99999
-void ultsnd()
-{
+char auth[] = "89c6f85111344502acd50d7b5a21b488";         //Put your auth code here
+
+void ultsnd()     
+{                                                         //function to use ultrasound module returns distance as int
   digitalWrite(trigpin,LOW);
   delayMicroseconds(2);
   digitalWrite(trigpin,HIGH);
@@ -29,7 +31,7 @@ void ultsnd()
  
   
 }
-BLYNK_WRITE(V1) {
+BLYNK_WRITE(V1) {                               //joystick controls{same as analog stick}
   int x = param[0].asInt();
   int y = param[1].asInt();
 
@@ -38,7 +40,7 @@ BLYNK_WRITE(V1) {
   Serial.print(x);
   Serial.print("; Y = ");
   Serial.println(y);
-int a;
+int a;                                          //a variable to make test cases
 if(0<=y && y<=37)
 a=0;
 else if(219<=y && y<=255)
@@ -93,14 +95,14 @@ default:
 }
 }
 
-BLYNK_WRITE(V2)
-{
+BLYNK_WRITE(V2)                                           
+{                                           //mapping servo inputs
    int pos = param[0].asInt();
    pos=map(pos,-90,90,255,0);
    myservo.write(pos);
 }
 
-BLYNK_WRITE(V3)
+BLYNK_WRITE(V3)                             //Toggling (actually just running the ultrasound) 
 {
   int buttonState=param.asInt();
   Serial.println(buttonState);
@@ -115,12 +117,14 @@ BLYNK_WRITE(V3)
 
   }
 }
-BLYNK_CONNECTED()
+BLYNK_CONNECTED()                       //Optional (Added so that every pin remains in sync always during runtime)
 {
   Blynk.syncVirtual(V1);
   Blynk.syncVirtual(V2);
   Blynk.syncVirtual(V3);
 }
+
+
 void setup()
 {
   pinMode(powpin,OUTPUT);
